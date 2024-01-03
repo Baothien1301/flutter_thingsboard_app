@@ -997,6 +997,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'vi'),
       Locale.fromSubtags(languageCode: 'zh'),
     ];
   }
@@ -1011,9 +1012,11 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   bool _isSupported(Locale locale) {
     for (var supportedLocale in supportedLocales) {
       if (supportedLocale.languageCode == locale.languageCode) {
+        print("Bao language is supported ${supportedLocale.languageCode}");
         return true;
       }
     }
+    print("Bao language is not supported");
     return false;
   }
 }

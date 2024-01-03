@@ -25,9 +25,9 @@
     </queries>
     <application
         android:requestLegacyExternalStorage="true"
-        android:label="ThingsBoard App"
+        android:label="VTC Digicom"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/vtc_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
