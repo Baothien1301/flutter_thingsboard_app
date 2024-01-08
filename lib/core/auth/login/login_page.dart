@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thingsboard_app/constants/assets_path.dart';
 import 'package:thingsboard_app/core/context/tb_context.dart';
 import 'package:thingsboard_app/core/context/tb_context_widget.dart';
@@ -193,6 +194,28 @@ class _LoginPageState extends TbPageState<LoginPage> {
                                   _login();
                                 },
                               ),
+                              SizedBox(height: 48),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      _changeLanguage();
+                                      setState(() {});
+                                    },
+                                    child: Text(
+                                      '${S.of(context).changeLanguage}',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          letterSpacing: 1,
+                                          fontSize: 12,
+                                          height: 16 / 12),
+                                    ),
+                                  )
+                                ],
+                              ),
                               SizedBox(height: 48)
                             ]),
                       )));
@@ -357,5 +380,22 @@ class _LoginPageState extends TbPageState<LoginPage> {
 
   void _forgotPassword() async {
     navigateTo('/login/resetPasswordRequest');
+  }
+
+  void _changeLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? language = prefs.getString('lang');
+    if(language == null){
+      prefs.setString('lang', 'vi');
+      language = 'vi';
+    }else if(language == 'vi'){
+      prefs.setString('lang', 'en');
+      language = 'en';
+    }else{
+      prefs.setString('lang', 'vi');
+      language = 'vi';
+    }
+    S.load(Locale.fromSubtags(languageCode: language));
+    print(S.current.password);
   }
 }

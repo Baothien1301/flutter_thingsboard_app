@@ -168,6 +168,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationCodeManyRequest": MessageLookupByLibrary.simpleMessage(
             "Quá nhiều yêu cầu kiểm tra mã xác nhận"),
         "verifyYourIdentity":
-            MessageLookupByLibrary.simpleMessage("Bạn xác nhận thành công.")
+            MessageLookupByLibrary.simpleMessage("Bạn xác nhận thành công."),
+        "changeLanguage":
+            MessageLookupByLibrary.simpleMessage("Đổi sang Tiếng Anh ->")
       };
 }

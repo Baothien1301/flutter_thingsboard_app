@@ -1,4 +1,5 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 import 'package:flutter/material.dart';
@@ -13,12 +14,18 @@ import 'config/themes/tb_theme.dart';
 import 'generated/l10n.dart';
 
 final appRouter = ThingsboardAppRouter();
-
+String? language;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 //  await FlutterDownloader.initialize();
 //  await Permission.storage.request();
-
+  final prefs = await SharedPreferences.getInstance();
+  language = prefs.getString('lang');
+  if(language == null){
+    prefs.setString('lang', 'vi');
+    language = 'vi';
+  }
+  print("Bao test language is:"+language!);
   if (UniversalPlatform.isAndroid) {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
@@ -139,6 +146,7 @@ class ThingsboardAppState extends State<ThingsboardApp>
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
+        locale: Locale(language!),
         supportedLocales: S.delegate.supportedLocales,
         onGenerateTitle: (BuildContext context) => S.of(context).appTitle,
         themeMode: ThemeMode.light,
@@ -153,6 +161,7 @@ class ThingsboardAppState extends State<ThingsboardApp>
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
+              locale: Locale(language!),
               supportedLocales: S.delegate.supportedLocales,
               onGenerateTitle: (BuildContext context) => S.of(context).appTitle,
               theme: tbTheme,
@@ -170,6 +179,7 @@ class ThingsboardAppState extends State<ThingsboardApp>
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
+              locale: Locale(language!),
               supportedLocales: S.delegate.supportedLocales,
               onGenerateTitle: (BuildContext context) => S.of(context).appTitle,
               theme: tbTheme,

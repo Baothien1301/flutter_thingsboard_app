@@ -34,7 +34,7 @@ class S {
       Intl.defaultLocale = localeName;
       final instance = S();
       S._current = instance;
-
+      print("Bao language load is"+instance.password);
       return instance;
     });
   }
@@ -985,6 +985,15 @@ class S {
     return Intl.message(
       'Backup code',
       name: 'mfaProviderBackupCode',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `Change language to Tiếng Việt`
+  String get changeLanguage {
+    return Intl.message(
+      'Change to Vietnamese',
+      name: 'changeLanguage',
       desc: '',
       args: [],
     );

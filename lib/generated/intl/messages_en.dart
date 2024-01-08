@@ -168,6 +168,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationCodeManyRequest": MessageLookupByLibrary.simpleMessage(
             "Too many requests check verification code"),
         "verifyYourIdentity":
-            MessageLookupByLibrary.simpleMessage("Verify your identity")
+            MessageLookupByLibrary.simpleMessage("Verify your identity"),
+        "changeLanguage":
+            MessageLookupByLibrary.simpleMessage("Change to Vietnamese ->")
       };
 }

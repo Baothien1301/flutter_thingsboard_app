@@ -81,61 +81,73 @@ mixin ContactBasedBase<T extends ContactBased, P> on EntitiesBase<T, P> {
     var address = Utils.contactToShortAddress(contact);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Flexible(
-              fit: FlexFit.tight,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        FittedBox(
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.centerLeft,
-                            child: Text('${contact.getName()}',
-                                style: TextStyle(
-                                    color: Color(0xFF282828),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    height: 20 / 14))),
-                        Text(
-                            entityDateFormat.format(
-                                DateTime.fromMillisecondsSinceEpoch(
-                                    contact.createdTime!)),
-                            style: TextStyle(
-                                color: Color(0xFFAFAFAF),
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                height: 16 / 12))
-                      ]),
-                  SizedBox(height: 4),
-                  if (contact.email != null)
-                    Text(contact.email!,
-                        style: TextStyle(
-                            color: Color(0xFFAFAFAF),
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            height: 16 / 12)),
-                  if (contact.email == null) SizedBox(height: 16),
-                  if (address != null) SizedBox(height: 4),
-                  if (address != null)
-                    Text(address,
-                        style: TextStyle(
-                            color: Color(0xFFAFAFAF),
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            height: 16 / 12)),
-                ],
-              )),
-          SizedBox(width: 16),
-          Icon(Icons.chevron_right, color: Color(0xFFACACAC)),
-          SizedBox(width: 8)
-        ],
+      child: GestureDetector(
+        onPanUpdate: (details) {
+          // Swiping in right direction.
+          if (details.delta.dx > 5) {
+            print("Bao slide to right");
+          }
+          // Swiping in left direction.
+          if (details.delta.dx < -5) {
+            print("Bao slide to left");
+          }
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+                fit: FlexFit.tight,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FittedBox(
+                              fit: BoxFit.fitWidth,
+                              alignment: Alignment.centerLeft,
+                              child: Text('${contact.getName()}',
+                                  style: TextStyle(
+                                      color: Color(0xFF282828),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      height: 20 / 14))),
+                          Text(
+                              entityDateFormat.format(
+                                  DateTime.fromMillisecondsSinceEpoch(
+                                      contact.createdTime!)),
+                              style: TextStyle(
+                                  color: Color(0xFFAFAFAF),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  height: 16 / 12))
+                        ]),
+                    SizedBox(height: 4),
+                    if (contact.email != null)
+                      Text(contact.email!,
+                          style: TextStyle(
+                              color: Color(0xFFAFAFAF),
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              height: 16 / 12)),
+                    if (contact.email == null) SizedBox(height: 16),
+                    if (address != null) SizedBox(height: 4),
+                    if (address != null)
+                      Text(address,
+                          style: TextStyle(
+                              color: Color(0xFFAFAFAF),
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              height: 16 / 12)),
+                  ],
+                )),
+            SizedBox(width: 16),
+            Icon(Icons.chevron_right, color: Color(0xFFACACAC)),
+            SizedBox(width: 8)
+          ],
+        ),
       ),
     );
   }
